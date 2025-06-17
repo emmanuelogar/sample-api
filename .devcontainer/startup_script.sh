@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-echo "✅ Starting K3s and tooling setup..."
+echo "✅ Starting K3s and tooling setup.."
 
 ### 1. Install K3s with Traefik disabled
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable=traefik" sh -
