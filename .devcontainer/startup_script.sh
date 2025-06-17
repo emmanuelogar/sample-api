@@ -1,29 +1,35 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
+echo "✅ Kubectl and Helm installed successfully"
 
-echo 'export KUBECONFIG=/etc/rancher/k3s/k3s.yaml' >> ~/.bashrc
-echo 'export KUBECONFIG=/etc/rancher/k3s/k3s.yaml' >> ~/.zshrc
-
-set -e
-
-echo "✅ Starting K3s and tooling setup.."
-
-### 1. Install K3s with Traefik disabled
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable=traefik" sh -
-
-# Ensure kubeconfig is available
-export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-echo "✅ K3s installed with Traefik disabled"
-
-### 2. Install kubectx and kubens
 sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
-sudo ln -sf /opt/kubectx/kubectx /usr/local/bin/kubectx
-sudo ln -sf /opt/kubectx/kubens /usr/local/bin/kubens
-echo "✅ kubectx and kubens installed"
+sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
+sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+brew install derailed/k9s/k9s
 
-### 3. Install fzf and k9s
-sudo apt-get update -y
-sudo apt-get install -y fzf k9s
-echo "✅ fzf and k9s installed"
+echo "✅ kubectx, kubens, fzf, and k9s installed successfully"
+sudo apt-get install fzf -y
+
+alias k="kubectl"
+alias kga="kubectl get all"
+alias kgn="kubectl get all --all-namespaces"
+alias kdel="kubectl delete"
+alias kd="kubectl describe"
+alias kg="kubectl get"
+
+echo 'alias k="kubectl"' >> /home/$USER/.bashrc
+echo 'alias kga="kubectl get all"' >> /home/$USER/.bashrc
+echo 'alias kgn="kubectl get all --all-namespaces"' >> /home/$USER/.bashrc
+echo 'alias kdel="kubectl delete"' >> /home/$USER/.bashrc
+echo 'alias kd="kubectl describe"' >> /home/$USER/.bashrc
+echo 'alias kg="kubectl get"' >> /home/$USER/.bashrc
+
+echo "✅ The following aliases were added:"
+echo "alias k=kubectl"
+echo "alias kga=kubectl get all"
+echo "alias kgn=kubectl get all --all-namespaces"
+echo "alias kdel=kubectl delete"
+echo "alias kd=kubectl describe"
+echo "alias kg=kubectl get"
 
 ### 4. Install Helm (if not already installed)
 if ! command -v helm &> /dev/null; then
@@ -34,3 +40,5 @@ else
 fi
 
 echo "🎉 Setup complete! K3s is running without an Ingress controller."
+
+source ~/.bashrc 
