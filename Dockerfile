@@ -1,10 +1,15 @@
 FROM golang:alpine AS build-env
-RUN mkdir /go/src/app && apk update && apk add git
-ADD main.go go.mod go.sum /go/src/app/
+
+RUN apk update && apk add --no-cache git
+
 WORKDIR /go/src/app
-RUN go mod download && CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o app .
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . ./
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags='-extldflags "-static"' -o app .
 
 FROM scratch
 WORKDIR /app
 COPY --from=build-env /go/src/app/app .
-ENTRYPOINT [ "./app" ]
+ENTRYPOINT ["./app"]

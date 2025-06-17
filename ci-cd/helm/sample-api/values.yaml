@@ -1,0 +1,39 @@
+name: frontend
+replicaCount: 2
+image:
+  repository: emmanuelogar/sample-api
+  tag: v1
+  pullPolicy: IfNotPresent
+
+redis:
+  secretName: redis-password
+  secretKey: redis-password
+  host: redis-svc
+
+configMapName: app-config
+
+service:
+  port: 3000
+  targetPort: 3000
+  type: ClusterIP
+
+enableIngress: true
+
+ingress:
+  name: frontend-ingress
+  apiPath: /api
+  staticPath: /
+  staticService: static-svc
+  staticPort: 80
+
+serviceAccount:
+  create: true
+  name: frontend-sa
+  automount: true
+  annotations: {}
+
+vault:
+  enabled: true
+  role: "myapp-role"
+  redisSecretPath: "secret/data/redis"
+

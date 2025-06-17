@@ -15,6 +15,6 @@ spec:
                 app: static
         spec:
             containers:
-            - image: magalixcorp/static:v1
+            - image: emmanuelogar/static:v1
               imagePullPolicy: IfNotPresent
               name: static

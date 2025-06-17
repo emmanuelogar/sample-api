@@ -1,0 +1,11 @@
+enableIngress: false
+
+service:
+  type: ClusterIP
+
+ingress:
+  name: frontend-ingress
+  apiPath: /api
+  staticPath: /
+  staticService: static-svc
+  staticPort: 80
