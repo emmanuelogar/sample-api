@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+echo 'export KUBECONFIG=/etc/rancher/k3s/k3s.yaml' >> ~/.bashrc
+echo 'export KUBECONFIG=/etc/rancher/k3s/k3s.yaml' >> ~/.zshrc
+
 set -e
 
 echo "✅ Starting K3s and tooling setup.."

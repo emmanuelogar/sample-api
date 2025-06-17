@@ -37,3 +37,4 @@ vault:
   role: "myapp-role"
   redisSecretPath: "secret/data/redis"
 
+nameStatic: static

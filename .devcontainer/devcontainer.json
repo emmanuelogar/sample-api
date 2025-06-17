@@ -1,8 +1,9 @@
 {
     "forwardPorts": [8001, 5000],
   
-    "postCreateCommand": "/bin/bash -c '.devcontainer/startup_script.sh && helm install myapp ./helm-chart -f .devcontainer/dev-values.yaml'", 
-  
+    "postCreateCommand": "/bin/bash .devcontainer/startup_script.sh",
+    "postAttachCommand": "/bin/bash -c 'helm install sample-api ./ci-cd/helm/sample-api -f .devcontainer/dev-values.yaml'",
+
     "customizations": {
       "vscode": {
         "extensions": [
