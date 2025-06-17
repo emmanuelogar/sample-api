@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.nameStatic }}
+  labels:
+    app: {{ .Values.nameStatic }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.nameStatic }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.nameStatic }}
+    spec:
+      containers:
+        - name: {{ .Values.nameStatic }}
+          image: emmanuelogar/static:v1
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
