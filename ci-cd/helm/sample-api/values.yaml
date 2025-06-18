@@ -1,9 +1,9 @@
 name: frontend
-replicaCount: 2
+replicaCount: 1
 image:
-  repository: emmanuelogar/sample-api
+  repository: docker.io/emmanuelogar/sample-api
   tag: v1
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 redis:
   secretName: redis-password

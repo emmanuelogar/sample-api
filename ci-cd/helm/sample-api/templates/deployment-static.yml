@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
         - name: {{ .Values.nameStatic }}
-          image: emmanuelogar/static:v1
+          image: docker.io/emmanuelogar/static:v2
           imagePullPolicy: {{ .Values.image.pullPolicy }}
